@@ -27,9 +27,10 @@ return new class extends Migration
 
 
             $table->bigInteger('utilisateur_id')->nullable();
-          
+
             $table->bigInteger('ligne_id')->nullable();
-            
+            $table->bigInteger('zone_id')->nullable();
+
             $table->integer('etat')->default(1);
             $table->timestamps();
         });

@@ -33,8 +33,8 @@ class ChauffeurController extends Controller
                 "id"=>$chauffeur->id,
                 "nom_prenom"=>$chauffeur->nom == null ? ' ' :$chauffeur->nom.' '.$chauffeur->prenom,
                 "telephone"=>$chauffeur->telephone == null ? ' ' :$chauffeur->telephone,
+                "categorie_permis"=>$chauffeur->categorie_permis == null ? ' ' :$chauffeur->categorie_permis,
 
-                 "voiture"=>$chauffeur->voiture_id == null ? ' ' : $chauffeur->voiture->plaque,
 
 
             );
@@ -90,7 +90,7 @@ class ChauffeurController extends Controller
                     $request->prenom,
                     $request->telephone,
                     $request->categorie_permis,
-                    $request->categorie_permis,
+
                     $request->voiture_id,
 
                      $annee_id
@@ -138,7 +138,7 @@ class ChauffeurController extends Controller
                     $request->prenom,
                     $request->telephone,
                     $request->categorie_permis,
-                    $request->categorie_permis,
+
                     $request->voiture_id,
 
                      $annee_id,
