@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Classe;
 use App\Models\Cycle;
+
+
 use App\Models\Detail;
-
-
 use App\Models\Inscription;
 use App\Models\Niveau;
 use App\Types\StatutPaiement;
@@ -39,27 +40,47 @@ class ChiffreController extends Controller
         foreach($cycles as $cycle )
 
         {
+
+            $scolarite_previsionnel =   Inscription::getScolaritePrevisionnel( $annee_id,$cycle->id);
+            $cantine_previsionnel =   Inscription::getCantinePrevisionnel( $annee_id,$cycle->id);
+            $bus_previsionnel =   Inscription::getBusPrevisionnel( $annee_id,$cycle->id);
+            $paiement_scolarite = (int)  Detail::getMontantTotal($annee_id,null, TypePaiement::FRAIS_SCOLARITE, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null, $cycle->id );
+            $paiement_cantine =  (int)  Detail::getMontantTotal($annee_id,null, TypePaiement::CANTINE, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null, $cycle->id );
+            $paiement_bus = (int)   Detail::getMontantTotal($annee_id,null, TypePaiement::BUS, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null, $cycle->id );
+
+           /*  $pourcentage_scolarite = round(($scolarite_previsionnel/$paiement_scolarite),2);
+            $pourcentage_cantine = round(($cantine_previsionnel/$paiement_cantine),2);
+            $pourcentage_bus  = round(($bus_previsionnel/$paiement_bus),2);
+ */
+
+
+
             $data []  = array(
 
                 "id"=>$cycle->id,
 
                 "libelle"=>$cycle->libelle == null ? ' ' :$cycle->libelle,
 
-                "scolarite_previsionnel"=>  Inscription::getScolaritePrevisionnel( $annee_id,$cycle->id),
-                "cantine_previsionnel"=>  Inscription::getCantinePrevisionnel( $annee_id,$cycle->id),
-                "bus_previsionnel"=>  Inscription::getBusPrevisionnel( $annee_id,$cycle->id),
-                "livre_previsionnel"=>  Inscription::getBusPrevisionnel( $annee_id,$cycle->id),
+                "scolarite_previsionnel"=>   $scolarite_previsionnel,
+                "cantine_previsionnel"=>   $cantine_previsionnel,
+                "bus_previsionnel"=>  $bus_previsionnel,
 
 
                  "total_eleves"=>  Inscription::getTotal( $annee_id, null, $cycle->id, null,null,  null, null, StatutValidation::VALIDE),
                  "total_anciens"=>  Inscription::getTotal( $annee_id, null, $cycle->id, null,null,null, TypeInscription::REINSCRIPTION, StatutValidation::VALIDE),
                  "total_nouveau"=>  Inscription::getTotal( $annee_id, null, $cycle->id, null,null,null, TypeInscription::INSCRIPTION, StatutValidation::VALIDE),
-                 "paiement_scolarite"=> Detail::getMontantTotal($annee_id,null, TypePaiement::FRAIS_SCOLARITE, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null, $cycle->id ),
-                 "paiement_cantine"=> Detail::getMontantTotal($annee_id,null, TypePaiement::CANTINE, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null, $cycle->id ),
-                 "paiement_bus"=> Detail::getMontantTotal($annee_id,null, TypePaiement::BUS, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null, $cycle->id ),
-                 "paiement_livre"=> Detail::getMontantTotal($annee_id,null, TypePaiement::LIVRE, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null, $cycle->id ),
 
 
+                 "paiement_scolarite"=>  $paiement_scolarite,
+                 "paiement_cantine"=> $paiement_cantine,
+                 "paiement_bus"=> $paiement_bus,
+
+
+               /*   "pourcentage_scolarite"=>  $pourcentage_scolarite,
+                 "pourcentage_cantine"=> $pourcentage_cantine,
+                 "pourcentage_bus"=> $pourcentage_bus,
+
+ */
 
 
 
@@ -104,20 +125,32 @@ class ChiffreController extends Controller
         $niveaux = Niveau::getListe();
 
         foreach($niveaux as $niveau ){
+
+            $scolarite_previsionnel =   Inscription::getScolaritePrevisionnel( $annee_id,null,$niveau->id);
+            $cantine_previsionnel =   Inscription::getCantinePrevisionnel(  $annee_id,null,$niveau->id);
+            $bus_previsionnel =   Inscription::getBusPrevisionnel(  $annee_id,null,$niveau->id);
+            $paiement_scolarite = (int)  Detail::getMontantTotal($annee_id,null, TypePaiement::FRAIS_SCOLARITE, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null, null, $niveau->id );
+            $paiement_cantine =  (int)  Detail::getMontantTotal($annee_id,null, TypePaiement::CANTINE, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null,null, $niveau->id );
+            $paiement_bus = (int)   Detail::getMontantTotal($annee_id,null, TypePaiement::BUS, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null, null,$niveau->id );
+
             $data []  = array(
 
                 "id"=>$niveau->id,
+                "cycle"=>$niveau->cycle_id == null ? ' ' : $niveau->cycle->libelle,
 
-
-                "cycle"=>$niveau->cycle_id == null ? ' ' :$niveau->cycle->libelle,
                 "libelle"=>$niveau->libelle == null ? ' ' :$niveau->libelle,
 
-                  "total_eleves"=>  Inscription::getChiffreAffaire( $annee_id, null, $cycle->id),
+                "scolarite_previsionnel"=>   $scolarite_previsionnel,
+                "cantine_previsionnel"=>   $cantine_previsionnel,
+                "bus_previsionnel"=>  $bus_previsionnel,
 
 
-                 "total_previsionnel"=>  Inscription::getChiffreAffaire( $annee_id, null, $cycle->id),
-                 "total_reel"=> Detail::getMontantTotal($annee_id, null, null, null, null,
-                  null, null, null, null,null, null, null, null, $cycle->id ),
+                 "total_eleves"=>  Inscription::getTotal( $annee_id, null, null, $niveau->id,null,  null, null, StatutValidation::VALIDE),
+
+
+                 "paiement_scolarite"=>  $paiement_scolarite,
+                 "paiement_cantine"=> $paiement_cantine,
+                 "paiement_bus"=> $paiement_bus,
 
 
 
@@ -155,22 +188,39 @@ class ChiffreController extends Controller
         $compte_id = $session['compte_id'];
 
 
-        $classes = Classe::getListe();
+        $classes = Classe::getListe(null, null,$annee_id );
 
         foreach($classes as $classe ){
+
+            $scolarite_previsionnel =   Inscription::getScolaritePrevisionnel( $annee_id,null,null,$classe->id);
+            $cantine_previsionnel =   Inscription::getCantinePrevisionnel(  $annee_id,null,null,$classe->id);
+            $bus_previsionnel =   Inscription::getBusPrevisionnel(  $annee_id,null,null,$classe->id);
+            $paiement_scolarite = (int)  Detail::getMontantTotal($annee_id,null, TypePaiement::FRAIS_SCOLARITE, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null, null,null, $classe->id );
+            $paiement_cantine =  (int)  Detail::getMontantTotal($annee_id,null, TypePaiement::CANTINE, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null,null,null, $classe->id );
+            $paiement_bus = (int)   Detail::getMontantTotal($annee_id,null, TypePaiement::BUS, null, null, StatutPaiement::ENCAISSE, null, null, null, null, null, null, null, null,null,$classe->id );
+
+
+
             $data []  = array(
 
                 "id"=>$classe->id,
 
-                "cycle"=>$classe->cycle_id == null ? ' ' :$classe->cycle->libelle,
+                "cycle"=>$classe->cycle_id == null ? ' ' : $classe->cycle->libelle,
+                "niveau"=>$classe->niveau_id == null ? ' ' : $classe->niveau->libelle,
+
                 "libelle"=>$classe->libelle == null ? ' ' :$classe->libelle,
 
-                 "total_eleves"=>  Inscription::getChiffreAffaire( $annee_id, null, $cycle->id),
+                "scolarite_previsionnel"=>   $scolarite_previsionnel,
+                "cantine_previsionnel"=>   $cantine_previsionnel,
+                "bus_previsionnel"=>  $bus_previsionnel,
 
-                 "total_previsionnel"=>  Inscription::getChiffreAffaire( $annee_id, null, $cycle->id),
-                 "total_reel"=> Detail::getMontantTotal($annee_id, null, null, null, null,
-                  null, null, null, null,null, null, null, null, $cycle->id ),
 
+                 "total_eleves"=>  Inscription::getTotal( $annee_id, null, null, $niveau->id,null,  null, null, StatutValidation::VALIDE),
+
+
+                 "paiement_scolarite"=>  $paiement_scolarite,
+                 "paiement_cantine"=> $paiement_cantine,
+                 "paiement_bus"=> $paiement_bus,
 
 
             );

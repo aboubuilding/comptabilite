@@ -3,7 +3,7 @@
 
 @section('title')
 
-    Chiffre d affaire  | Cycles
+    Chiffre d affaire  | Classes
 
 @endsection
 
@@ -51,7 +51,7 @@
                                     </div>
                                     <div>
 
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -64,6 +64,8 @@
                                                 <th>
                                                     <input type="checkbox" class="form-check-input" id="checkAll" required="">
                                                 </th>
+                                                <th>Cycle </th>
+                                                <th>Niveau </th>
                                                 <th>Libelle </th>
                                                 <th>Total eleve  </th>
                                                 <th>Solarite prév  </th>
@@ -81,7 +83,7 @@
                                         <tbody>
 
 
-                                        @foreach( $data as $cycle )
+                                        @foreach( $data as $classe )
 
 
                                             <tr>
@@ -93,22 +95,41 @@
                                                         </div>
                                                     </div>
                                                 </td>
+
                                                 <td>
                                                     <div class="trans-list">
 
-                                                        <h4>{{ $cycle ['libelle'] }}</h4>
+                                                        <h4>{{ $classe ['cycle'] }}</h4>
                                                     </div>
                                                 </td>
 
 
+                                                <td>
+                                                    <div class="trans-list">
+
+                                                        <h4>{{ $classe ['niveau'] }}</h4>
+                                                    </div>
+                                                </td>
+
+
+                                                <td>
+                                                    <div class="trans-list">
+
+                                                        <h4>{{ $classe ['libelle'] }}</h4>
+                                                    </div>
+                                                </td>
+
+
+
+
                                                 <td><h6 class="mb-0">
-                                                    {{ $cycle ['total_eleves'] }}
+                                                    {{ $classe ['total_eleves'] }}
 
                                                 </h6></td>
                                                 <td>
                                                     <h6 class="mb-0">
 
-                                                    {{ number_format($cycle ['scolarite_previsionnel'], 0, ',', ' ') }}
+                                                    {{ number_format($classe ['scolarite_previsionnel'], 0, ',', ' ') }}
 
 
 
@@ -118,7 +139,7 @@
 
 
 
-                                                {{ number_format($cycle ['paiement_scolarite'], 0, ',', ' ') }}
+                                                {{ number_format($classe ['paiement_scolarite'], 0, ',', ' ') }}
 
 
 
@@ -126,7 +147,7 @@
 
                                                 </td>
                                                 <td><h6 class="mb-0">
-                                                {{ number_format($cycle ['cantine_previsionnel'], 0, ',', ' ') }}
+                                                {{ number_format($classe ['cantine_previsionnel'], 0, ',', ' ') }}
 
 
 
@@ -135,7 +156,7 @@
                                                 </h6></td>
                                                 <td><h6 class="mb-0">
 
-                                                {{ number_format($cycle ['paiement_cantine'], 0, ',', ' ') }}
+                                                {{ number_format($classe ['paiement_cantine'], 0, ',', ' ') }}
 
 
 
@@ -144,7 +165,7 @@
                                                 <td><h6 class="mb-0">
 
 
-                                                {{ number_format($cycle ['bus_previsionnel'], 0, ',', ' ') }}
+                                                {{ number_format($classe ['bus_previsionnel'], 0, ',', ' ') }}
 
 
 
@@ -152,7 +173,7 @@
                                                 <td><h6 class="mb-0">
 
 
-                                                {{ number_format($cycle ['paiement_bus'], 0, ',', ' ') }}
+                                                {{ number_format($classe ['paiement_bus'], 0, ',', ' ') }}
 
 
 
@@ -162,7 +183,7 @@
 
                                                 <td>
                                                     <div class="d-flex">
-                                                        <a href="#" class="btn btn-danger shadow btn-xs sharp me-1 detailCycle" style="background-color: #1EA1F3; border: #1EA1F3" data-id="{{$cycle['id']}}" title="Détails  " data-id="{{$cycle['id']}}"><i class="fa fa-eye"></i></a>
+                                                        <a href="#" class="btn btn-danger shadow btn-xs sharp me-1 detailCycle" style="background-color: #1EA1F3; border: #1EA1F3" data-id="{{$classe['id']}}" title="Détails  " data-id="{{$classe['id']}}"><i class="fa fa-eye"></i></a>
 
 
 

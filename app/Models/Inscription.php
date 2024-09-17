@@ -1181,7 +1181,7 @@ class Inscription extends Model
      * Retourne le chiffre d affaire pour un cycle , ou un niveau
      *
      *
-     * @param  int $id
+
 
      * @return  int $total
      */
@@ -1190,54 +1190,57 @@ class Inscription extends Model
         $annee_id = null,
         $cycle_id  = null,
         $niveau_id  = null,
-        $classe_id  = null,
-        $inscription_id  = null
+        $classe_id  = null
+   
 
 
 
     ) {
 
-        $chiffre_affaire = 0;
+       
 
-        $query =  Inscription::select( DB::raw('SUM(inscriptions.frais_scolarite) AS chiffre_affaire'))
-
+        $query =  DB::table('inscriptions')
         ->where('inscriptions.etat', '!=', TypeStatus::SUPPRIME)
-        ->where('inscriptions.statut_validation', '!=', StatutValidation::VALIDE)
+        ->where('inscriptions.statut_validation', '=', StatutValidation::VALIDE)
 
         ;
 
-        if ($annee_id!= null) {
+        if ($annee_id != null) {
 
             $query->where('inscriptions.annee_id', '=', $annee_id);
         }
 
 
-        if ($cycle_id!= null) {
+        if ($cycle_id != null) {
 
             $query->where('inscriptions.cycle_id', '=', $cycle_id);
         }
 
 
-        if ($niveau_id!= null) {
+        if ($niveau_id != null) {
 
             $query->where('inscriptions.niveau_id', '=', $niveau_id);
         }
 
 
-        if ($classe_id!= null) {
+        if ($classe_id != null) {
 
             $query->where('inscriptions.classe_id', '=', $classe_id);
         }
 
 
 
-        if ($inscription_id!= null) {
+        
 
-            $query->where('inscriptions.inscription_id', '=', $inscription_id);
+
+        $total = $query->SUM('inscriptions.frais_scolarite');
+
+        if ($total) {
+
+            return   $total;
         }
 
-
-        return    $query->get();
+        return 0;
 
 
 
@@ -1258,19 +1261,16 @@ class Inscription extends Model
         $cycle_id  = null,
         $niveau_id  = null,
         $classe_id  = null,
-        $inscription_id  = null
+     
 
 
 
 
     ) {
 
-        $chiffre_affaire = 0;
-
-        $query =  Inscription::select( DB::raw('SUM(inscriptions.frais_cantine) AS chiffre_affaire'))
-
+        $query =  DB::table('inscriptions')
         ->where('inscriptions.etat', '!=', TypeStatus::SUPPRIME)
-        ->where('inscriptions.statut_validation', '!=', StatutValidation::VALIDE)
+        ->where('inscriptions.statut_validation', '=', StatutValidation::VALIDE)
 
         ;
 
@@ -1299,13 +1299,16 @@ class Inscription extends Model
 
 
 
-        if ($inscription_id!= null) {
 
-            $query->where('inscriptions.inscription_id', '=', $inscription_id);
+      
+        $total = $query->SUM('inscriptions.frais_cantine');
+
+        if ($total) {
+
+            return   $total;
         }
 
-
-        return    $query->get();
+        return 0;
 
 
 
@@ -1325,18 +1328,17 @@ class Inscription extends Model
         $annee_id = null,
         $cycle_id  = null,
         $niveau_id  = null,
-        $classe_id  = null,
-        $inscription_id  = null
+        $classe_id  = null
+      
 
 
 
     ) {
 
-        $chiffre_affaire = 0;
-
-        $query =  Inscription::select( DB::raw('SUM(inscriptions.frais_cantine) AS chiffre_affaire'))
+      
+        $query =  DB::table('inscriptions')
         ->where('inscriptions.etat', '!=', TypeStatus::SUPPRIME)
-        ->where('inscriptions.statut_validation', '!=', StatutValidation::VALIDE)
+        ->where('inscriptions.statut_validation', '=', StatutValidation::VALIDE)
 
         ;
 
@@ -1365,13 +1367,16 @@ class Inscription extends Model
 
 
 
-        if ($inscription_id!= null) {
 
-            $query->where('inscriptions.inscription_id', '=', $inscription_id);
+
+        $total = $query->SUM('inscriptions.frais_bus');
+
+        if ($total) {
+
+            return   $total;
         }
 
-
-        return    $query->get();
+        return 0;
 
 
 
@@ -1391,20 +1396,21 @@ class Inscription extends Model
         $annee_id = null,
         $cycle_id  = null,
         $niveau_id  = null,
-        $classe_id  = null,
-        $inscription_id  = null
+        $classe_id  = null
+       
 
 
 
     ) {
 
-        $chiffre_affaire = 0;
+       
 
-        $query =  Inscription::select( DB::raw('SUM(inscriptions.frais_livre) AS chiffre_affaire'))
+        $query =  DB::table('inscriptions')
         ->where('inscriptions.etat', '!=', TypeStatus::SUPPRIME)
-        ->where('inscriptions.statut_validation', '!=', StatutValidation::VALIDE)
+        ->where('inscriptions.statut_validation', '=', StatutValidation::VALIDE)
 
         ;
+
 
         if ($annee_id!= null) {
 
@@ -1431,13 +1437,15 @@ class Inscription extends Model
 
 
 
-        if ($inscription_id!= null) {
 
-            $query->where('inscriptions.inscription_id', '=', $inscription_id);
+        $total = $query->SUM('inscriptions.frais_livre');
+
+        if ($total) {
+
+            return   $total;
         }
 
-
-        return    $query->get();
+        return 0;
 
 
 
