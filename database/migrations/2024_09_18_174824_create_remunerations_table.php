@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('remunerations', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('personnel_id')->nullable();
+            $table->bigInteger('employe_id')->nullable();
             $table->float('salaire_base')->nullable();
             $table->float('prime_anciennete')->nullable();
             $table->float('sursalaire')->nullable();

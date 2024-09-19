@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('retenues', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('personnel_id')->nullable();
+            $table->bigInteger('employe_id')->nullable();
             $table->float('irpp')->nullable();
-           
+
             $table->bigInteger('annee_id')->nullable();
             $table->integer('etat')->default(1);
             $table->timestamps();

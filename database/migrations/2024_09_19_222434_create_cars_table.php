@@ -13,19 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('livres', function (Blueprint $table) {
+        Schema::create('cars', function (Blueprint $table) {
             $table->id();
 
+            $table->date('date_souscription')->nullable();
+            $table->float('montant_annuel_prevu')->nullable();
+            $table->string('destination')->nullable();
+            $table->text('adresse_map')->nullable();
 
-            $table->bigInteger('auteur_id')->nullable();
-            $table->bigInteger('maison_edition_id')->nullable();
             $table->bigInteger('annee_id')->nullable();
-            $table->bigInteger('categorie_livre_id')->nullable();
-            $table->bigInteger('annee_edition_id')->nullable();
-            $table->string('titre')->nullable();
-            $table->string('numero')->nullable();
-            $table->string('numero_isbn')->nullable();
+            $table->bigInteger('inscription_id')->nullable();
 
+            $table->bigInteger('ligne_id')->nullable();
+            $table->bigInteger('zone_id')->nullable();
 
             $table->integer('etat')->default(1);
             $table->timestamps();
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('livres');
+        Schema::dropIfExists('cars');
     }
 };
