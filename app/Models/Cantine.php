@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class Achat extends Model
+class Cantine extends Model
 {
     use HasFactory;
 
@@ -42,7 +42,7 @@ class Achat extends Model
 
 
     /**
-     * Ajouter un achat
+     * Ajouter un Cantine
      *
 
      * @param  date $date_souscription
@@ -55,10 +55,10 @@ class Achat extends Model
 
 
 
-     * @return Achat
+     * @return Cantine
      */
 
-    public static function addAchat(
+    public static function addCantine(
         $date_souscription,
         $montant_annuel_prevu,
         $type_offre,
@@ -67,38 +67,38 @@ class Achat extends Model
 
     )
     {
-        $achat = new Achat();
+        $Cantine = new Cantine();
 
 
-        $achat->date_souscription = $date_souscription;
-        $achat->montant_annuel_prevu = $montant_annuel_prevu;
-        $achat->type_offre = $type_offre;
+        $Cantine->date_souscription = $date_souscription;
+        $Cantine->montant_annuel_prevu = $montant_annuel_prevu;
+        $Cantine->type_offre = $type_offre;
 
 
-        $achat->annee_id = $annee_id;
-        $achat->inscription_id = $inscription_id;
+        $Cantine->annee_id = $annee_id;
+        $Cantine->inscription_id = $inscription_id;
 
-        $achat->created_at = Carbon::now();
+        $Cantine->created_at = Carbon::now();
 
-        $achat->save();
+        $Cantine->save();
 
-        return $achat;
+        return $Cantine;
     }
 
     /**
-     * Affichage d'un achat
+     * Affichage d'un Cantine
      * @param int $id
-     * @return  Achat
+     * @return  Cantine
      */
 
-    public static function rechercheAchatById($id)
+    public static function rechercheCantineById($id)
     {
 
-        return   $achat = Achat::findOrFail($id);
+        return   $Cantine = Cantine::findOrFail($id);
     }
 
     /**
-     * Update d'une Achat scolaire
+     * Update d'une Cantine scolaire
 
     * @param  date $date_souscription
      * @param  string $montant_annuel_prevu
@@ -110,10 +110,10 @@ class Achat extends Model
 
 
      * @param int $id
-     * @return  Achat
+     * @return  Cantine
      */
 
-    public static function updateAchat(
+    public static function updateCantine(
         $date_souscription,
         $montant_annuel_prevu,
         $type_offre,
@@ -126,7 +126,7 @@ class Achat extends Model
     {
 
 
-        return   $achat = Achat::findOrFail($id)->update([
+        return   $Cantine = Cantine::findOrFail($id)->update([
 
 
 
@@ -149,21 +149,21 @@ class Achat extends Model
 
 
     /**
-     * Supprimer une Achat
+     * Supprimer une Cantine
      *
      * @param int $id
      * @return  boolean
      */
 
-    public static function deleteAchat($id)
+    public static function deleteCantine($id)
     {
 
-        $achat = Achat::findOrFail($id)->update([
+        $Cantine = Cantine::findOrFail($id)->update([
             'etat' => TypeStatus::SUPPRIME
 
         ]);
 
-        if ($achat) {
+        if ($Cantine) {
             return 1;
         }
         return 0;
@@ -172,7 +172,7 @@ class Achat extends Model
 
 
     /**
-     * Retourne la liste des Achats
+     * Retourne la liste des Cantines
 
 
      * @param  int $annee_id
@@ -187,40 +187,56 @@ class Achat extends Model
     public static function getListe(
 
         $annee_id = null,
-
-       
         $inscription_id = null,
-        $statut_livraison = null
+        $cycle_id = null,
+        $niveau_id = null,
+        $classe_id = null
 
 
     ) {
 
 
 
-        $query =  Achat::where('etat', '!=', TypeStatus::SUPPRIME)
+        $query =  Cantine:: select('inscriptions.id as inscription_id', 'eleves.nom as nom_eleve', 'eleves.prenom as prenom_eleve', 'cantines.type_offre as offre','cycles.libelle as libelle_cycle',
+        'niveaux.libelle as niveau_libelle')
+
+        ->join('inscriptions','cantines.inscription_id','=','inscriptions.id')
+        ->join('eleves','inscriptions.eleve_id','=','eleves.id')
+        ->join('cycles','inscriptions.cycle_id','=','cycles.id')
+        ->join('niveaux','inscriptions.niveau_id','=','niveaux.id')
+
+
+        ->where('cantines.etat', '!=', TypeStatus::SUPPRIME)
+
+
         ;
 
         if ($annee_id != null) {
 
-            $query->where('annee_id', '=', $annee_id);
-        }
-
-        if ($fournisseur_id != null) {
-
-            $query->where('fournisseur_id', '=', $fournisseur_id);
+            $query->where('cantines.annee_id', '=', $annee_id);
         }
 
 
+        if ($inscription_id != null) {
 
-         if ($inscription_id != null) {
+            $query->where('cantines.inscription_id', '=', $inscription_id);
+        }
 
-            $query->where('inscription_id', '=', $inscription_id);
+        if ($niveau_id != null) {
+
+            $query->where('inscriptions.niveau_id', '=', $niveau_id);
         }
 
 
-            if ($statut_livraison != null) {
+        if ($classe_id != null) {
 
-            $query->where('statut_livraison', '=', $statut_livraison);
+            $query->where('inscriptions.classe_id', '=', $classe_id);
+        }
+
+
+        if ($cycle_id!= null) {
+
+            $query->where('inscriptions.cycle_id', '=', $cycle_id);
         }
 
 
@@ -233,7 +249,7 @@ class Achat extends Model
 
 
     /**
-     * Retourne le nombre  des  achats
+     * Retourne le nombre  des  Cantines
 
 
    * @param  int $annee_id
@@ -246,11 +262,11 @@ class Achat extends Model
      */
 
     public static function getTotal(
-         $annee_id = null,
-
-        $fournisseur_id = null,
+        $annee_id = null,
         $inscription_id = null,
-        $statut_livraison = null
+        $cycle_id = null,
+        $niveau_id = null,
+        $classe_id = null
 
 
 
@@ -258,33 +274,39 @@ class Achat extends Model
 
     ) {
 
-        $query =   DB::table('achats')
+        $query =  Cantine:: select('inscriptions.id as inscription_id', 'eleves.nom as nom_eleve', 'eleves.prenom as prenom_eleve', 'cantines.type_offre as offre','cycles.libelle as libelle_cycle',
+        'niveaux.libelle as niveau_libelle', 'cantines.')
+
+        ->join('inscriptions','cantines.inscription_id','=','inscriptions.id')
+        ->join('eleves','inscriptions.eleve_id','=','eleves.id')
+        ->join('cycles','inscriptions.cycle_id','=','cycles.id')
+        ->join('niveaux','inscriptions.niveau_id','=','niveaux.id')
 
 
-            ->where('achats.etat', '!=', TypeStatus::SUPPRIME);
+
+        ->where('cantines.etat', '!=', TypeStatus::SUPPRIME);
 
 
-       if ($annee_id != null) {
+        if ($inscription_id != null) {
 
-            $query->where('annee_id', '=', $annee_id);
+            $query->where('cantines.inscription_id', '=', $inscription_id);
         }
 
-        if ($fournisseur_id != null) {
+        if ($niveau_id != null) {
 
-            $query->where('fournisseur_id', '=', $fournisseur_id);
+            $query->where('inscriptions.niveau_id', '=', $niveau_id);
         }
 
 
+        if ($classe_id != null) {
 
-         if ($inscription_id != null) {
-
-            $query->where('inscription_id', '=', $inscription_id);
+            $query->where('inscriptions.classe_id', '=', $classe_id);
         }
 
 
-            if ($statut_livraison != null) {
+        if ($cycle_id!= null) {
 
-            $query->where('statut_livraison', '=', $statut_livraison);
+            $query->where('inscriptions.cycle_id', '=', $cycle_id);
         }
 
 
@@ -320,36 +342,15 @@ class Achat extends Model
      * Obtenir un fournisseur
      *
      */
-    public function fournisseur()
+    public function inscription()
     {
 
 
-        return $this->belongsTo(Fournisseur::class, 'fournisseur_id');
+        return $this->belongsTo(Inscription::class, 'inscription_id');
     }
 
 
 
-     /**
-     * Generer le  code de paiement
-
-     * @return  string
-     */
-
-     public static function genererNumero()
-     {
-
-         $numero = "MAR-ACHT-000";
-
-         $last =  Achat::orderBy('id', 'DESC')
-             ->latest()->first();;
-
-         if ($last) {
-             $numero = $numero . $last->id;
-         }
-
-
-         return $numero;
-     }
 
 
 }

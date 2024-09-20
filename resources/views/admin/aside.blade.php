@@ -149,13 +149,15 @@
                 <span class="nav-text">Parc     </span>
             </a>
             <ul aria-expanded="false">
-                <li><a href="{{url('/parc')}}">Tableau de bord    </a></li>
+                <li><a href="{{url('/cars/tableau')}}">Tableau de bord    </a></li>
+                <li><a href="{{url('/zones/index')}}">Zones      </a></li>
+                <li><a href="{{url('/cars/index')}}">Souscriptions       </a></li>
                 <li><a href="{{url('/voitures/index')}}">Voitures    </a></li>
                 <li><a href="{{url('/chauffeurs/index')}}">Chauffeurs     </a></li>
                 <li><a href="{{url('/lignes/index')}}">Lignes de bus      </a></li>
                 <li><a href="{{url('/paiements/parc')}}">Tous les paiements      </a></li>
                 <li><a href="{{url('/depenses/parc')}}">Toutes les depenses    </a></li>
-                <li><a href="{{url('/souscriptions/parc')}}">Souscripions       </a></li>
+
 
 
             </ul>
@@ -168,13 +170,17 @@
             <span class="nav-text">Cantines      </span>
         </a>
         <ul aria-expanded="false">
-            <li><a href="{{url('/cantine')}}">Tableau de bord     </a></li>
-            <li><a href="{{url('/stocks/index')}}">Stocks    </a></li>
+            <li><a href="{{url('/cantines/tableau')}}">Tableau de bord     </a></li>
+            <li><a href="{{url('/paiements/cantine')}}">Paiements       </a></li>
+
             <li><a href="{{url('/achats/index')}}">Achats      </a></li>
+
+            <li><a href="{{url('/stocks/index')}}">Stocks    </a></li>
+
             <li><a href="{{url('/magasins/index')}}">Magasins      </a></li>
             <li><a href="{{url('/produits/index')}}">Produits      </a></li>
             <li><a href="{{url('/fournisseurs/index')}}">Fournisseurs      </a></li>
-            <li><a href="{{url('/cantine/souscriptions/index')}}">Souscriptions       </a></li>
+            <li><a href="{{url('/cantines/index')}}">Souscriptions       </a></li>
 
 
 
