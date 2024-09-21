@@ -6,30 +6,15 @@ use App\Http\Controllers\Controller;
 
 
 
-use App\Models\Annee;
+
 use App\Models\Caisse;
 
-use App\Models\Detail;
 use App\Models\Mouvement;
-
-use App\Models\Inscription;
-
-use App\Models\Paiement;
-
-use App\Models\Souscription;
 use App\Models\User;
 
-
-use App\Types\StatutPaiement;
 use App\Types\TypeMouvement;
-use App\Types\TypePaiement;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
-use Excel;
 
 class DecaissementController extends Controller
 {
@@ -125,14 +110,14 @@ class DecaissementController extends Controller
 
 
 
-   
 
 
 
 
 
 
-  
+
+
 
 
 
@@ -154,16 +139,16 @@ class DecaissementController extends Controller
         $decaissement = Mouvement::rechercheMouvementById($id);
 
         $depense = $decaissement->depense;
-       
-       
+
+
         $caisse = Caisse::rechercheCaisseById($decaissement->caisse_id);
 
-      
-      
+
+
         $caissier = User::rechercheUserById($caisse->responsable_id);
         $name = "Decaissement" . $paiement->reference;
 
-     
+
 
 
 
@@ -173,11 +158,11 @@ class DecaissementController extends Controller
             'admin.decaissement.pdf',
             [
 
-                
+
                 'depense' => $depense,
                 'decaissement' => $decaissement,
                 "caissier" => $caissier,
-           
+
             ]
         );
         // }
@@ -205,10 +190,10 @@ class DecaissementController extends Controller
         $decaissement = Mouvement::rechercheMouvementById($id);
         $caisse  = Caisse::rechercheCaisseById($decaissement->caisse_id);
         $responsable  = User::rechercheUserById($caisse->responsable_id);
-       
+
         $depense = Depense::rechercheDepenseById($decaissement->depense_id);
 
-       
+
 
         return response()->json(
 
@@ -217,7 +202,7 @@ class DecaissementController extends Controller
                 'decaissement'=>$decaissement,
                 'depense'=>$depense,
                 'caisse'=>$caisse,
-               
+
                 'data'=>$data,
 
 

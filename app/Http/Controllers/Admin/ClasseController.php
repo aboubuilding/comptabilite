@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Annee;
+
 use App\Models\Classe;
 
-use App\Models\Inscription;
 
-
-use App\Types\StatutEleve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 

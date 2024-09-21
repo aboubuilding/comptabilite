@@ -5,12 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cycle;
 
-use App\Models\Inscription;
-
-use App\Models\Niveau;
-use App\Types\Menu;
-use App\Types\Sexe;
-use App\Types\StatutEleve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 

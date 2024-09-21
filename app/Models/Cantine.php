@@ -197,7 +197,7 @@ class Cantine extends Model
 
 
 
-        $query =  Cantine:: select('inscriptions.id as inscription_id', 'eleves.nom as nom_eleve', 'eleves.prenom as prenom_eleve', 'cantines.type_offre as offre','cycles.libelle as libelle_cycle',
+        $query =  Cantine:: select('cantines.inscription_id', 'cantines.date_souscription', 'cantines.montant_annuel_prevu', 'eleves.nom as nom_eleve', 'eleves.prenom as prenom_eleve', 'cantines.type_offre as offre','cycles.libelle as libelle_cycle',
         'niveaux.libelle as niveau_libelle')
 
         ->join('inscriptions','cantines.inscription_id','=','inscriptions.id')

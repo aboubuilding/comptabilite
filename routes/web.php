@@ -35,35 +35,17 @@ Route::middleware(['admin', 'comptable', 'directeur'])->group(function () {
 
 
 
-//-----------------  Chiffres d affaires
+//-----------------  Inscriptions
 
-
-
-    Route::get('/chiffres/cycles', [App\Http\Controllers\Admin\ChiffreController::class, 'cycles'])->name('admin_chiffre_cycles');
-
-
-    Route::get('/chiffres/cycles/{id}', [\App\Http\Controllers\Admin\ChiffreController::class, 'detailCycle'])->name('admin_chiffres_detail_cycle');
-
-
-      Route::get('/chiffres/niveaux/{id}', [\App\Http\Controllers\Admin\ChiffreController::class, 'detailNiveau'])->name('admin_chiffres_detail_niveau');
-
-
-
-      Route::get('/chiffres/classes/{id}', [\App\Http\Controllers\Admin\ChiffreController::class, 'detailClasse'])->name('admin_chiffres_detail_classe');
-
-
-        Route::get('/chiffres/eleves/{id}', [\App\Http\Controllers\Admin\ChiffreController::class, 'detailEleve'])->name('admin_chiffres_detail_eleve');
-
-
-    Route::get('/chiffres/niveaux/{id}', [\App\Http\Controllers\Admin\ChiffreController::class, 'detailNiveau'])->name('admin_chiffres_detail_niveau');
-
-
-    Route::get('/chiffres/niveaux', [App\Http\Controllers\Admin\ChiffreController::class, 'niveaux'])->name('admin_chiffre_niveaux');
-
-
-    Route::get('/chiffres/classes', [App\Http\Controllers\Admin\ChiffreController::class, 'classes'])->name('admin_chiffre_classes');
-
-    Route::get('/chiffres/eleves', [App\Http\Controllers\Admin\ChiffreController::class, 'eleves'])->name('admin_chiffre_eleves');
+    Route::get('/inscriptions/cycles', [App\Http\Controllers\Admin\InscriptionController::class, 'cycles'])->name('admin_chiffre_cycles');
+    Route::get('/inscriptions/cycles/{id}', [\App\Http\Controllers\Admin\InscriptionController::class, 'detailCycle'])->name('admin_chiffres_detail_cycle');
+    Route::get('/inscriptions/niveaux/{id}', [\App\Http\Controllers\Admin\InscriptionController::class, 'detailNiveau'])->name('admin_chiffres_detail_niveau');
+    Route::get('/inscriptions/classes/{id}', [\App\Http\Controllers\Admin\InscriptionController::class, 'detailClasse'])->name('admin_chiffres_detail_classe');
+    Route::get('/inscriptions/eleves/{id}', [\App\Http\Controllers\Admin\InscriptionController::class, 'detailEleve'])->name('admin_chiffres_detail_eleve');
+    Route::get('/inscriptions/niveaux/{id}', [\App\Http\Controllers\Admin\InscriptionController::class, 'detailNiveau'])->name('admin_chiffres_detail_niveau');
+    Route::get('/inscriptions/niveaux', [App\Http\Controllers\Admin\InscriptionController::class, 'niveaux'])->name('admin_chiffre_niveaux');
+    Route::get('/inscriptions/classes', [App\Http\Controllers\Admin\InscriptionController::class, 'classes'])->name('admin_chiffre_classes');
+    Route::get('/inscriptions/eleves', [App\Http\Controllers\Admin\InscriptionController::class, 'eleves'])->name('admin_chiffre_eleves');
 
 
 
@@ -75,26 +57,7 @@ Route::middleware(['admin', 'comptable', 'directeur'])->group(function () {
     Route::post('/paiements/save', [\App\Http\Controllers\Admin\PaiementController::class, 'store'])->name('admin_paiements_store');
     Route::get('/paiements/detail/{id}', [\App\Http\Controllers\Admin\PaiementController::class, 'detail'])->name('admin_paiements_detail');
     Route::post('/paiements/delete/{id}', [\App\Http\Controllers\Admin\PaiementController::class, 'delete'])->name('admin_paiements_delete');
-
     Route::get('/paiements/charger/{id}', [App\Http\Controllers\Admin\PaiementController::class, 'charger'])->name('admin_paiements_charger');
-
-
-//----------------- Inscriptions
-
-Route::get('/inscriptions/index', [App\Http\Controllers\Admin\InscriptionController::class, 'index'])->name('admin_inscriptions_index');
-Route::get('/inscriptions/modifier/{id}', [App\Http\Controllers\Admin\InscriptionController::class, 'edit'])->name('admin_inscriptions_edit');
-Route::get('/inscriptions/detail/{id}', [App\Http\Controllers\Admin\InscriptionController::class, 'detail'])->name('admin_inscriptions_detail');
-Route::get('/inscriptions/charger/{id}', [App\Http\Controllers\Admin\InscriptionController::class, 'charger'])->name('admin_inscriptions_charger');
-Route::post('/inscriptions/update/{id}', [App\Http\Controllers\Admin\InscriptionController::class, 'update'])->name('admin_inscriptions_update');
-Route::post('/inscriptions/delete/{id}', [App\Http\Controllers\Admin\InscriptionController::class, 'delete'])->name('admin_inscriptions_delete');
-
-
-
-
-
-
-
-
 
         //----------------- Banques
 
@@ -104,8 +67,6 @@ Route::post('/inscriptions/delete/{id}', [App\Http\Controllers\Admin\Inscription
     Route::get('/banques/modifier/{id}', [App\Http\Controllers\Admin\BanqueController::class, 'edit'])->name('admin_banque_edit');
     Route::post('/banques/update/{id}', [App\Http\Controllers\Admin\BanqueController::class, 'update'])->name('admin_banque_update');
     Route::post('/banques/delete/{id}', [App\Http\Controllers\Admin\BanqueController::class, 'delete'])->name('admin_banque_delete');
-
-
 
 
         //----------------- Cheques
@@ -139,22 +100,11 @@ Route::post('/inscriptions/delete/{id}', [App\Http\Controllers\Admin\Inscription
     Route::post('/activites/delete/{id}', [App\Http\Controllers\Admin\ActiviteController::class, 'delete'])->name('admin_activites_delete');
 
 
-
-
-
-
-
      //----------------- Recouvrements
 
     Route::get('/recouvrements/scolarite', [App\Http\Controllers\Admin\RecouvrementController::class, 'scolarite'])->name('admin_recouvrement_niveaux');
-
-
     Route::get('/recouvrements/cantine', [App\Http\Controllers\Admin\RecouvrementController::class, 'classes'])->name('admin_recouvrement_cantine');
-
     Route::get('/recouvrements/bus', [App\Http\Controllers\Admin\RecouvrementController::class, 'eleves'])->name('admin_recouvrement_bus');
-
-
-
     Route::get('/recouvrements/examen', [App\Http\Controllers\Admin\RecouvrementController::class, 'eleves'])->name('admin_recouvrement_examen');
 
 
@@ -169,7 +119,6 @@ Route::post('/inscriptions/delete/{id}', [App\Http\Controllers\Admin\Inscription
     Route::get('/caisses/detail/{id}', [App\Http\Controllers\Admin\CaisseController::class, 'detail'])->name('admin_caisse_detail');
     Route::post('/caisses/update/{id}', [App\Http\Controllers\Admin\CaisseController::class, 'update'])->name('admin_caisse_update');
     Route::post('/caisses/delete/{id}', [App\Http\Controllers\Admin\CaisseController::class, 'delete'])->name('admin_caisse_delete');
-
     Route::post('/caisses/cloturer/{id}', [App\Http\Controllers\Admin\CaisseController::class, 'cloturer'])->name('admin_caisse_cloturer');
     Route::get('/caisses/journaltotal/{id}', [App\Http\Controllers\Admin\CaisseController::class, 'journalTotaux'])->name('admin_caisse_journal_total');
     Route::get('/caisses/journaldetails/{id}', [App\Http\Controllers\Admin\CaisseController::class, 'journalDetail'])->name('admin_caisse_journal_detail');
@@ -179,7 +128,6 @@ Route::post('/inscriptions/delete/{id}', [App\Http\Controllers\Admin\Inscription
     //----------------- Encaissements
 
     Route::get('/encaissements/index', [App\Http\Controllers\Admin\EncaissementController::class, 'index'])->name('admin_encaissements_index');
-
     Route::get('/encaissements/add', [App\Http\Controllers\Admin\EncaissementController::class, 'add'])->name('admin_encaissements__add');
     Route::post('/encaissements/save', [App\Http\Controllers\Admin\EncaissementController::class, 'store'])->name('admin_encaissements__store');
     Route::get('/encaissements/modifier/{id}', [App\Http\Controllers\Admin\EncaissementController::class, 'edit'])->name('admin_encaissements_edit');
@@ -202,51 +150,12 @@ Route::post('/inscriptions/delete/{id}', [App\Http\Controllers\Admin\Inscription
     Route::post('/decaissements/delete/{id}', [App\Http\Controllers\Admin\DecaissementController::class, 'delete'])->name('admin_decaissement_delete');
 
 
-
-
-
-
     //----------------- Mouvements
 
     Route::get('/mouvements/index', [App\Http\Controllers\Admin\MouvementController::class, 'index'])->name('admin_mouvements_index');
     Route::get('/mouvements/modifier/{id}', [App\Http\Controllers\Admin\MouvementController::class, 'edit'])->name('admin_mouvements_edit');
     Route::post('/mouvements/update/{id}', [App\Http\Controllers\Admin\MouvementController::class, 'update'])->name('admin_mouvemnts_update');
     Route::post('/mouvements/delete/{id}', [App\Http\Controllers\Admin\MouvementController::class, 'delete'])->name('admin_mouvemnts_delete');
-
-
-
-
-    //----------------- Caissiers
-
-    Route::get('/caissiers/index', [App\Http\Controllers\Admin\CaissierController::class, 'index'])->name('admin_caissiers_index');
-    Route::get('/caissiers/detail/{id}', [App\Http\Controllers\Admin\MouvementController::class, 'edit'])->name('admin_caissiers_detail');
-
-
-
-
-
-
-    //----------------- Depenses
-
-    Route::get('/depenses/index', [App\Http\Controllers\Admin\DepenseController::class, 'index'])->name('admin_depenses_index');
-    Route::get('/depenses/mine', [App\Http\Controllers\Admin\DepenseController::class, 'mine'])->name('admin_depenses_mine');
-    Route::get('/depenses/add', [App\Http\Controllers\Admin\DepenseController::class, 'add'])->name('admin_depenses_add');
-    Route::post('/depenses/save', [App\Http\Controllers\Admin\DepenseController::class, 'store'])->name('admin_depenses_store');
-    Route::get('/depenses/modifier/{id}', [App\Http\Controllers\Admin\DepenseController::class, 'edit'])->name('admin_depenses_edit');
-    Route::post('/depenses/update/{id}', [App\Http\Controllers\Admin\DepenseController::class, 'update'])->name('admin_depenses_update');
-    Route::post('/depenses/delete/{id}', [App\Http\Controllers\Admin\DepenseController::class, 'delete'])->name('admin_depenses_delete');
-
-    Route::post('/depenses/valider/{id}', [App\Http\Controllers\Admin\DepenseController::class, 'valider'])->name('admin_depenses_valider');
-
-    Route::get('/depenses/valides', [App\Http\Controllers\Admin\DepenseController::class, 'valides'])->name('admin_depenses_valides');
-
-
-    Route::get('/depenses/parc', [App\Http\Controllers\Admin\DepenseController::class, 'index'])->name('admin_depenses_index');
-
-
-
-
-
 
 
     //----------------- Utilisateurs
@@ -314,13 +223,13 @@ Route::post('/inscriptions/delete/{id}', [App\Http\Controllers\Admin\Inscription
 
 
 
-          //----------------- Articles vendus
+//----------------- Articles vendus
 
-          Route::get('/articles/index', [App\Http\Controllers\Admin\ArticleController::class, 'index'])->name('admin_article_index');
-          Route::post('/articles/save', [App\Http\Controllers\Admin\ArticleController::class, 'store'])->name('admin_articles_store');
-          Route::get('/articles/modifier/{id}', [App\Http\Controllers\Admin\ArticleController::class, 'edit'])->name('admin_articles_edit');
-          Route::post('/articles/update/{id}', [App\Http\Controllers\Admin\ArticleController::class, 'update'])->name('admin_articles_update');
-          Route::post('/articles/delete/{id}', [App\Http\Controllers\Admin\ArticleController::class, 'delete'])->name('admin_articles_delete');
+Route::get('/articles/index', [App\Http\Controllers\Admin\ArticleController::class, 'index'])->name('admin_article_index');
+Route::post('/articles/save', [App\Http\Controllers\Admin\ArticleController::class, 'store'])->name('admin_articles_store');
+Route::get('/articles/modifier/{id}', [App\Http\Controllers\Admin\ArticleController::class, 'edit'])->name('admin_articles_edit');
+ Route::post('/articles/update/{id}', [App\Http\Controllers\Admin\ArticleController::class, 'update'])->name('admin_articles_update');
+Route::post('/articles/delete/{id}', [App\Http\Controllers\Admin\ArticleController::class, 'delete'])->name('admin_articles_delete');
 
 
 

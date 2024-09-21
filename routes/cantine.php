@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['admin', 'comptable', 'directeur'])->group(function () {
 
 
-    //----------------- Paiements liés aux bus
+    //----------------- Paiements liés a la cantine 
 
 
-    Route::get('/paiements/parc', [\App\Http\Controllers\Admin\PaiementController::class, 'cantine'])->name('admin_paiements_cantine');
+    Route::get('/paiements/cantine', [\App\Http\Controllers\Admin\PaiementController::class, 'cantine'])->name('admin_paiements_cantine');
 
 
      //----------------- Cantines

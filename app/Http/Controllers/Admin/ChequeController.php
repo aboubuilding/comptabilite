@@ -5,12 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cheque;
 
-use App\Models\Inscription;
 
-use App\Models\Niveau;
-use App\Types\Menu;
-use App\Types\Sexe;
-use App\Types\StatutEleve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -37,7 +32,7 @@ class ChequeController extends Controller
                 "reference"=> $cheque->paiement_id == null ? ' ' : $cheque->paiement->reference,
                 "statut"=> $cheque->statut == null ? ' ' : $cheque->statut,
                 "banque_id"=> $cheque->banque_id == null ? ' ' : $cheque->banque->libelle,
-              
+
 
 
             );
@@ -58,7 +53,7 @@ class ChequeController extends Controller
 
 
 
-   
+
 
 
 
@@ -72,7 +67,7 @@ class ChequeController extends Controller
 
         ],[
             'numero.required'=>'Le numero   est obligatoire ',
-         
+
 
         ]);
 
@@ -90,7 +85,7 @@ class ChequeController extends Controller
                     $request->statut,
                     $request->date_encaissement,
                     $request->banque_id,
-      
+
 
                     $id
 
