@@ -32,7 +32,7 @@ class VoitureController extends Controller
 
                 "id"=>$voiture->id,
 
-              
+
 
                 "marque"=>$voiture->marque == null ? ' ' : $voiture->marque,
                 "plaque"=>$voiture->plaque == null ? ' ' : $voiture->plaque,
@@ -80,8 +80,7 @@ class VoitureController extends Controller
 
                  Voiture::addVoiture(
 
-                    $request->photo,
-                    $request->couleur,
+                 
                     $request->marque,
                     $request->plaque,
                     $request->nombre_place,
@@ -121,8 +120,7 @@ class VoitureController extends Controller
 
                 Voiture::updateVoiture(
 
-                      $request->photo,
-                    $request->couleur,
+
                     $request->marque,
                     $request->plaque,
                     $request->nombre_place,
@@ -156,7 +154,7 @@ class VoitureController extends Controller
         $voiture = Voiture::rechercheVoitureById($id);
 
 
-        return response()->json(['code'=>1, 'Voiture'=>$voiture]);
+        return response()->json(['code'=>1, 'voiture'=>$voiture]);
 
 
     }

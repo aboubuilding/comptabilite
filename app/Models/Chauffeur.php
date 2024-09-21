@@ -30,10 +30,9 @@ class Chauffeur extends Model
         'nom',
         'prenom',
         'telephone',
-        'categorie_permis',
-        'voiture_id',
+
         'annee_id',
-       
+
 
 
         'etat',
@@ -49,10 +48,9 @@ class Chauffeur extends Model
      * @param  string $nom
      * @param  string $prenom
      * @param  string $telephone
-     * @param  int $categorie_permis
-     * @param  date $voiture_id
+
      * @param  date $annee_id
-    
+
 
 
 
@@ -64,10 +62,9 @@ class Chauffeur extends Model
         $nom,
         $prenom,
         $telephone,
-        $categorie_permis,
-        $voiture_id,
+
         $annee_id
-       
+
 
     )
     {
@@ -77,12 +74,11 @@ class Chauffeur extends Model
         $chauffeur->nom = $nom;
         $chauffeur->prenom = $prenom;
         $chauffeur->telephone = $telephone;
-        $chauffeur->categorie_permis = $categorie_permis;
-        $chauffeur->voiture_id = $voiture_id;
+
         $chauffeur->annee_id = $annee_id;
-     
-    
-       
+
+
+
         $chauffeur->created_at = Carbon::now();
 
         $chauffeur->save();
@@ -108,11 +104,10 @@ class Chauffeur extends Model
      * @param  string $nom
      * @param  string $prenom
      * @param  string $telephone
-     * @param  int $categorie_permis
-     * @param  date $voiture_id
+
      * @param  date $annee_id
-    
-     
+
+
 
 
      * @param int $id
@@ -123,10 +118,9 @@ class Chauffeur extends Model
       $nom,
         $prenom,
         $telephone,
-        $categorie_permis,
-        $voiture_id,
+
         $annee_id,
-       
+
         $id)
     {
 
@@ -138,11 +132,10 @@ class Chauffeur extends Model
             'nom' => $nom,
             'prenom' => $prenom,
             'telephone' => $telephone,
-            'categorie_permis' => $categorie_permis,
-            'voiture_id' => $voiture_id,
+
             'annee_id' => $annee_id,
-           
-           
+
+
             'id' => $id,
 
 
@@ -180,9 +173,8 @@ class Chauffeur extends Model
 
 
      * @param  int $annee_id
-     * @param  int $voiture_id
-     * @param  int $categorie_permis
-   
+
+
 
      *
      * @return  array
@@ -190,26 +182,20 @@ class Chauffeur extends Model
 
     public static function getListe(
 
-        $categorie_permis = null
-       
+        $annee_id = null
+
 
     ) {
 
-      
+
 
         $query =  Chauffeur::where('etat', '!=', TypeStatus::SUPPRIME)
         ;
 
-        if ($voiture_id != null) {
-
-            $query->where('voiture_id', '=', $voiture_id);
-        }
 
 
-         if ($categorie_permis != null) {
 
-            $query->where('categorie_permis', '=', $categorie_permis);
-        }
+
 
 
  if ($annee_id != null) {
@@ -218,11 +204,11 @@ class Chauffeur extends Model
         }
 
 
-         
 
-       
 
-       
+
+
+
 
 
         return    $query->get();
@@ -231,19 +217,18 @@ class Chauffeur extends Model
 
 
     /**
-     * Retourne le nombre  des  activités 
+     * Retourne le nombre  des  activités
 
     * @param  int $annee_id
-     * @param  int $voiture_id
-     * @param  int $categorie_permis
+
 
      * @return  int $total
      */
 
     public static function getTotal(
-        $categorie_permis = null
-       
-       
+        $annee_id = null
+
+
 
 
     ) {
@@ -254,17 +239,7 @@ class Chauffeur extends Model
             ->where('chauffeurs.etat', '!=', TypeStatus::SUPPRIME);
 
 
-      if ($voiture_id != null) {
-
-            $query->where('voiture_id', '=', $voiture_id);
-        }
-
-
-         if ($categorie_permis != null) {
-
-            $query->where('categorie_permis', '=', $categorie_permis);
-        }
-
+      
 
  if ($annee_id != null) {
 
@@ -285,8 +260,8 @@ class Chauffeur extends Model
 
 
 
-   
-    
+
+
 
 
 }

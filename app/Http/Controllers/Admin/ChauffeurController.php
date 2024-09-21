@@ -33,7 +33,7 @@ class ChauffeurController extends Controller
                 "id"=>$chauffeur->id,
                 "nom_prenom"=>$chauffeur->nom == null ? ' ' :$chauffeur->nom.' '.$chauffeur->prenom,
                 "telephone"=>$chauffeur->telephone == null ? ' ' :$chauffeur->telephone,
-                "categorie_permis"=>$chauffeur->categorie_permis == null ? ' ' :$chauffeur->categorie_permis,
+                "zone"=>'',
 
 
 
@@ -63,7 +63,7 @@ class ChauffeurController extends Controller
 
         $validator = \Validator::make($request->all(),[
             'nom'=>'required|string|max:25',
-            'prenom'=>'required|string|max:25',
+
             'telephone'=>'required',
 
 
@@ -71,7 +71,7 @@ class ChauffeurController extends Controller
 
         ],[
             'nom.required'=>'Le nom  est obligatoire ',
-            'prenom.required'=>'Le prenom  est obligatoire ',
+
             'telephone.required'=>'Le telephone  est obligatoire ',
 
 
@@ -89,9 +89,7 @@ class ChauffeurController extends Controller
                     $request->nom,
                     $request->prenom,
                     $request->telephone,
-                    $request->categorie_permis,
 
-                    $request->voiture_id,
 
                      $annee_id
 
@@ -115,13 +113,13 @@ class ChauffeurController extends Controller
         $validator = \Validator::make($request->all(),[
 
             'nom'=>'required|string|max:25',
-            'prenom'=>'required|string|max:25',
+
             'telephone'=>'required',
 
 
         ],[
              'nom.required'=>'Le nom  est obligatoire ',
-            'prenom.required'=>'Le prenom  est obligatoire ',
+
             'telephone.required'=>'Le telephone  est obligatoire ',
 
 
@@ -137,9 +135,7 @@ class ChauffeurController extends Controller
                    $request->nom,
                     $request->prenom,
                     $request->telephone,
-                    $request->categorie_permis,
 
-                    $request->voiture_id,
 
                      $annee_id,
 
@@ -171,7 +167,7 @@ class ChauffeurController extends Controller
         $chauffeur = Chauffeur::rechercheChauffeurById($id);
 
 
-        return response()->json(['code'=>1, 'Chauffeur'=>$chauffeur]);
+        return response()->json(['code'=>1, 'chauffeur'=>$chauffeur]);
 
 
     }

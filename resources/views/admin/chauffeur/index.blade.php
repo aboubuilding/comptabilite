@@ -57,7 +57,7 @@
                                                 </th>
                                                 <th>Nom et prénom </th>
                                                 <th>Télephone  </th>
-                                                <th>Voiture  </th>
+                                                <th>Zone   </th>
 
 
                                                 <th class="text-end">Action</th>
@@ -87,7 +87,7 @@
 
 
                                                 <td><h6 class="mb-0">{{ $chauffeur['telephone'] }} </h6></td>
-                                                <td><h6 class="mb-0">{{ $chauffeur['voiture'] }} </h6></td>
+                                                <td><h6 class="mb-0">{{ $chauffeur['zone'] }} </h6></td>
 
 
 
@@ -181,8 +181,7 @@
                     $(chauffeur_modal).find('form').find('input[name="nom"]').val(data.chauffeur.nom);
                     $(chauffeur_modal).find('form').find('input[name="prenom"]').val(data.chauffeur.prenom);
                     $(chauffeur_modal).find('form').find('input[name="telephone"]').val(data.chauffeur.telephone);
-                    $(chauffeur_modal).find('form').find('select[name="categorie_permis"]').val(data.chauffeur.categorie_permis);
-                    $(chauffeur_modal).find('form').find('select[name="voiture_id"]').val(data.chauffeur.voiture_id);
+
 
 
 
@@ -227,14 +226,16 @@
 
         function clearData() {
 
-            $('#libelle').val('');
-            $('#description').val('');
-            $('#numero_ordre').val('');
-            $('#cycle_id').val('');
+            $('#nom').val('');
+            $('#prenom').val('');
+            $('#telephone').val('');
+
 
 
             let form = document.getElementById('form');
             $(form).find('span.error-text').text('');
+
+         
 
             $("#ajouterChauffeur").show();
             $("#updateChauffeur").hide();
@@ -246,19 +247,20 @@
         function validerChauffeur() {
 
             let allValid = true;
-            let cycle_id = parseInt($("#cycle_id").val(), 10);
-            let libelle = $('#libelle').val().trim();
+
+            let nom = $('#nom').val().trim();
+            let telephone = $('#telephone').val().trim();
 
 
-            if (isNaN(cycle_id) || cycle_id === 0) {
-                $('.cycle_id_error').text("Le cycle    est obligatoire ");
+            if (nom === '') {
+                $('.nom_error').text("Le nom    est obligatoire ");
                 allValid = false;
 
             }
 
 
-            if (libelle === '') {
-                $('.libelle_error').text("Le libelle   est obligatoire ");
+            if (telephone === '') {
+                $('.nom_error').text("Le telephone    est obligatoire ");
                 allValid = false;
 
             }
@@ -346,7 +348,7 @@
 
             clearData();
 
-            $('#defaultModalLabel').text('Ajouter  un Chauffeur   ');
+            $('#defaultModalLabel').text('Ajouter  un chauffeur   ');
 
             $('#addChauffeur').modal('toggle');
         }
@@ -367,19 +369,19 @@
 
             let allValid = true;
 
-            let cycle_id = parseInt($("#cycle_id").val(), 10);
-            let libelle = $('#libelle').val().trim();
+            let nom = $('#nom').val().trim();
+            let telephone = $('#telephone').val().trim();
 
 
-            if (isNaN(cycle_id) || cycle_id === 0) {
-                $('.cycle_id_error').text("Le cycle    est obligatoire ");
+            if (nom === '') {
+                $('.nom_error').text("Le nom    est obligatoire ");
                 allValid = false;
 
             }
 
 
-            if (libelle === '') {
-                $('.libelle_error').text("Le libelle   est obligatoire ");
+            if (telephone === '') {
+                $('.nom_error').text("Le telephone    est obligatoire ");
                 allValid = false;
 
             }

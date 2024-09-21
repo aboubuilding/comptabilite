@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('libelle')->nullable();
             $table->float('prix_minimal')->nullable();
             $table->float('prix_plafond')->nullable();
-            $table->bigInteger('chauffeur_id')->nullable();
-            $table->bigInteger('voiture_id')->nullable();
+          
             $table->bigInteger('annee_id')->nullable();
             $table->integer('etat')->default(1);
 

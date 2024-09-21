@@ -30,10 +30,10 @@
             </a>
             <ul aria-expanded="false">
 
-                <li><a href="{{url('/chiffres/cycles')}}">Cycles   </a></li>
-                <li><a href="{{url('/chiffres/niveaux')}}">Niveaux    </a></li>
-                <li><a href="{{url('/chiffres/classes')}}">Classes </a></li>
-                <li><a href="{{url('/chiffres/classes')}}">Eleves </a></li>
+                <li><a href="{{url('/inscriptions/cycles')}}">Cycles   </a></li>
+                <li><a href="{{url('/inscriptions/niveaux')}}">Niveaux    </a></li>
+                <li><a href="{{url('/inscriptions/classes')}}">Classes </a></li>
+                <li><a href="{{url('/inscriptions/classes')}}">Eleves </a></li>
                 <li><a href="{{url('/chiffres/classes')}}">Modifier une inscription </a></li>
 
 

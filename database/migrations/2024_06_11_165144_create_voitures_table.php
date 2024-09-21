@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('voitures', function (Blueprint $table) {
             $table->id();
 
-            $table->string('photo')->nullable();
-            $table->string('couleur')->nullable();
+       
             $table->string('marque')->nullable();
             $table->string('plaque')->nullable();
             $table->tinyInteger('nombre_place')->nullable();

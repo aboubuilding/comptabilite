@@ -30,10 +30,9 @@ class Ligne extends Model
         'libelle',
         'prix_minimal',
         'prix_plafond',
-        'chauffeur_id',
-        'voiture_id',
+
         'annee_id',
-       
+
 
         'etat',
 
@@ -48,11 +47,10 @@ class Ligne extends Model
      * @param  string $libelle
      * @param  int $prix_minimal
      * @param  int $prix_plafond
-     * @param  int $chauffeur_id
-     * @param  int $voiture_id
+
      * @param  int $annee_id
 
-    
+
 
 
 
@@ -63,10 +61,9 @@ class Ligne extends Model
         $libelle,
         $prix_minimal,
         $prix_plafond,
-        $chauffeur_id,
-        $voiture_id,
+
         $annee_id
-       
+
 
     )
     {
@@ -76,10 +73,9 @@ class Ligne extends Model
         $ligne->libelle = $libelle;
         $ligne->prix_minimal = $prix_minimal;
         $ligne->prix_plafond = $prix_plafond;
-        $ligne->chauffeur_id = $chauffeur_id;
-        $ligne->voiture_id = $voiture_id;
+
         $ligne->annee_id = $annee_id;
-       
+
         $ligne->created_at = Carbon::now();
 
         $ligne->save();
@@ -105,10 +101,9 @@ class Ligne extends Model
    * @param  string $libelle
      * @param  int $prix_minimal
      * @param  int $prix_plafond
-     * @param  int $chauffeur_id
-     * @param  int $voiture_id
+
      * @param  int $annee_id
-    
+
 
      * @param int $id
      * @return  Ligne
@@ -118,11 +113,10 @@ class Ligne extends Model
           $libelle,
         $prix_minimal,
         $prix_plafond,
-        $chauffeur_id,
-        $voiture_id,
+
         $annee_id,
-       
-       
+
+
         $id)
     {
 
@@ -134,11 +128,10 @@ class Ligne extends Model
             'libelle' => $libelle,
             'prix_minimal' => $prix_minimal,
             'prix_plafond' => $prix_plafond,
-            'chauffeur_id' => $chauffeur_id,
-            'voiture_id' => $voiture_id,
+
             'annee_id' => $annee_id,
-           
-           
+
+
             'id' => $id,
 
 
@@ -173,14 +166,14 @@ class Ligne extends Model
 
     /**
 
-    
+
      * Retourne la liste des Lignes
 
-     * @param  int $voiture_id
+
      * @param  int $annee_id
-     * @param  int $chauffeur_id
-   
- 
+
+
+
 
 
      *
@@ -189,25 +182,18 @@ class Ligne extends Model
 
     public static function getListe(
 
-        $voiture_id = null,
-        $annee_id = null, 
-        $chauffeur_id = null
-     
-      
-        
+
+        $annee_id = null,
 
 
     ) {
 
-      
+
 
         $query =  Ligne::where('etat', '!=', TypeStatus::SUPPRIME)
         ;
 
-        if ($voiture_id != null) {
 
-            $query->where('voiture_id', '=', $voiture_id);
-        }
 
          if ($annee_id != null) {
 
@@ -215,16 +201,13 @@ class Ligne extends Model
         }
 
 
-        if ($chauffeur_id != null) {
-
-            $query->where('chauffeur_id', '=', $chauffeur_id);
-        }
 
 
-      
-       
 
-       
+
+
+
+
 
 
         return    $query->get();
@@ -233,24 +216,21 @@ class Ligne extends Model
 
 
     /**
-     * Retourne le nombre  des  activités 
+     * Retourne le nombre  des  activités
 
 
-     * @param  int $voiture_id
+
      * @param  int $annee_id
-     * @param  int $chauffeur_id
-   
-    
+
+
+
 
      * @return  int $total
      */
 
     public static function getTotal(
-          $voiture_id = null,
-        $annee_id = null,
-        $chauffeur_id = null
-       
 
+        $annee_id = null,
 
     ) {
 
@@ -260,10 +240,7 @@ class Ligne extends Model
             ->where('lignes.etat', '!=', TypeStatus::SUPPRIME);
 
 
-       if ($voiture_id != null) {
 
-            $query->where('voiture_id', '=', $voiture_id);
-        }
 
          if ($annee_id != null) {
 
@@ -271,12 +248,7 @@ class Ligne extends Model
         }
 
 
-        if ($chauffeur_id != null) {
 
-            $query->where('chauffeur_id', '=', $chauffeur_id);
-        }
-
-        
 
 
         $total = $query->count();
@@ -303,37 +275,7 @@ class Ligne extends Model
     }
 
 
-   
-
-     /**
-     * Obtenir un utilisateur
-     *
-     */
-    public function voiture()
-    {
 
 
-        return $this->belongsTo(Voiture::class, 'voiture_id');
-    }
-
-
-
-     /**
-     * Obtenir un utilisateur
-     *
-     */
-    public function chauffeur()
-    {
-
-
-        return $this->belongsTo(Chauffeur::class, 'chauffeur_id');
-    }
-
-
-
-
-    
-
-  
 
 }

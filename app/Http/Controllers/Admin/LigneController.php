@@ -34,11 +34,6 @@ class LigneController extends Controller
                 "libelle"=>$ligne->libelle == null ? ' ' :$ligne->libelle,
                 "prix_minimal"=>$ligne->prix_minimal == null ? ' ' :$ligne->prix_minimal,
                 "prix_plafond"=>$ligne->prix_plafond == null ? ' ' :$ligne->prix_plafond,
-                "chauffeur"=>$ligne->chauffeur_id == null ? ' ' :$ligne->chauffeur->nom.' '.$ligne->chauffeur->prenom,
-
-              
-
-                 "voiture"=>$ligne->voiture_id == null ? ' ' : $ligne->voiture->plaque,
 
 
             );
@@ -77,7 +72,7 @@ class LigneController extends Controller
             'libelle.required'=>'Le libelle  est obligatoire ',
             'prix_minimal.required'=>'Le prix minimal   est obligatoire ',
             'prix_plafond.required'=>'Le prix plafond   est obligatoire ',
-           
+
 
 
 
@@ -93,10 +88,9 @@ class LigneController extends Controller
                     $request->libelle,
                     $request->prix_minimal,
                     $request->prix_plafond,
-                    $request->chauffeur_id,
-                    $request->voiture_id,
-                 
-                 
+
+
+
                      $annee_id
 
 
@@ -141,9 +135,8 @@ class LigneController extends Controller
                    $request->libelle,
                     $request->prix_minimal,
                     $request->prix_plafond,
-                    $request->chauffeur_id,
-                    $request->voiture_id,
-                 
+
+
                      $annee_id,
 
                     $id
@@ -174,7 +167,7 @@ class LigneController extends Controller
         $ligne = Ligne::rechercheLigneById($id);
 
 
-        return response()->json(['code'=>1, 'Ligne'=>$ligne]);
+        return response()->json(['code'=>1, 'ligne'=>$ligne]);
 
 
     }

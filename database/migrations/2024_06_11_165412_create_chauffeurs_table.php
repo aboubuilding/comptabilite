@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('nom')->nullable();
             $table->string('prenom')->nullable();
             $table->string('telephone')->nullable();
-            $table->tinyInteger('categorie_permis')->nullable();
-            $table->bigInteger('voiture_id')->nullable();
+     
             $table->bigInteger('annee_id')->nullable();
 
             $table->tinyInteger('etat')->default(1);

@@ -27,13 +27,12 @@ class Voiture extends Model
     protected $fillable = [
 
 
-        'photo',
-        'couleur',
+
         'marque',
         'plaque',
         'nombre_place',
         'annee_id',
-    
+
 
         'etat',
 
@@ -45,13 +44,12 @@ class Voiture extends Model
      * Ajouter une Voiture
      *
 
-     * @param  string  $photo
-     * @param  string $couleur
+
      * @param  string $marque
      * @param  string $plaque
      * @param  int $nombre_place
      * @param  int $annee_id
- 
+
 
 
      * @return Voiture
@@ -59,13 +57,12 @@ class Voiture extends Model
 
     public static function addVoiture (
 
-        $photo,
-        $couleur,
+
         $marque,
         $plaque,
         $nombre_place,
         $annee_id
-      
+
 
 
 
@@ -75,13 +72,12 @@ class Voiture extends Model
         $voiture = new Voiture();
 
 
-        $voiture->photo = $photo;
-        $voiture->couleur = $couleur;
+
         $voiture->marque = $marque;
         $voiture->plaque = $plaque;
         $voiture->nombre_place = $nombre_place;
         $voiture->annee_id = $annee_id;
-       
+
 
 
         $voiture->created_at = Carbon::now();
@@ -107,9 +103,8 @@ class Voiture extends Model
      * Update d'une Voiture scolaire
      *
      *
-    
-   * @param  string  $photo
-     * @param  string $couleur
+
+
      * @param  string $marque
      * @param  string $plaque
      * @param  int $nombre_place
@@ -121,8 +116,7 @@ class Voiture extends Model
      */
 
     public static function updateVoiture(
-        $photo,
-        $couleur,
+
         $marque,
         $plaque,
         $nombre_place,
@@ -138,13 +132,12 @@ class Voiture extends Model
 
 
 
-            'photo' => $photo,
-            'couleur' => $couleur,
+
             'marque' => $marque,
             'plaque' => $plaque,
             'nombre_place' => $nombre_place,
             'annee_id' => $annee_id,
-       
+
 
 
             'id' => $id,
@@ -183,9 +176,9 @@ class Voiture extends Model
      * Retourne la liste des Voitures
 
 
-     * @param  int $marque_id
+
      * @param  int $annee_id
-     * @param  int $chauffeur_id
+
 
 
 
@@ -196,9 +189,9 @@ class Voiture extends Model
     public static function getListe(
 
 
-       
+
         $annee_id = null
-      
+
 
 
     ) {
@@ -211,14 +204,14 @@ class Voiture extends Model
 
 
 
-       
+
         if ($annee_id != null) {
 
             $query->where('annee_id', '=', $annee_id);
         }
 
 
-       
+
 
 
         return    $query->get();
@@ -230,9 +223,9 @@ class Voiture extends Model
      * Retourne le nombre  des  activités
      *
      *
- 
+
      * * @param int $annee_id
-   
+
  *
      *
      * @return  int $total
@@ -240,9 +233,9 @@ class Voiture extends Model
 
     public static function getTotal(
 
-      
+
         $annee_id = null
-       
+
 
     ) {
 
@@ -285,7 +278,7 @@ class Voiture extends Model
 
 
 
-   
+
 
 
 

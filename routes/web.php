@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+require base_path('routes/cantine.php');
+require base_path('routes/car.php');
+require base_path('routes/livre.php');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

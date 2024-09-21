@@ -16,7 +16,7 @@ use App\Types\StatutValidation;
 use App\Types\TypeInscription;
 use App\Types\TypePaiement;
 
-class ChiffreController extends Controller
+class InscriptionController extends Controller
 {
 
     /**
@@ -88,7 +88,7 @@ class ChiffreController extends Controller
             );
         }
 
-        return view('admin.chiffre.cycle')->with(
+        return view('admin.inscription.cycle')->with(
             [
                 'data' => $data,
 
@@ -157,7 +157,7 @@ class ChiffreController extends Controller
             );
         }
 
-        return view('admin.chiffre.niveau')->with(
+        return view('admin.inscription.niveau')->with(
             [
                 'data' => $data,
 
@@ -226,7 +226,7 @@ class ChiffreController extends Controller
             );
         }
 
-        return view('admin.chiffre.classe')->with(
+        return view('admin.inscription.classe')->with(
             [
                 'data' => $data,
 
@@ -277,7 +277,7 @@ class ChiffreController extends Controller
             );
         }
 
-        return view('admin.chiffre.eleves')->with(
+        return view('admin.inscription.eleves')->with(
             [
                 'data' => $data,
 

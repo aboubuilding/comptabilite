@@ -18,7 +18,7 @@
 
                     <div class="col-xl-12">
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Libelle </label>
+                            <label for="exampleFormControlInput1" class="form-label">Plaque </label>
                             <input type="text" class="form-control" id="plaque" name="plaque" ><br>
 
 
