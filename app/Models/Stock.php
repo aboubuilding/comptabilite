@@ -34,8 +34,8 @@ class Stock extends Model
         'annee_id',
         'quantite',
         'type_mouvement',
-       
-       
+
+
 
         'etat',
 
@@ -51,12 +51,12 @@ class Stock extends Model
      * @param  string $produit_id
      * @param  string $magasin_id
      * @param  date $bon_id
-   
+
      * @param  int $annee_id
      * @param  int $quantite
      * @param  int $type_mouvement
 
-    
+
 
      * @return Stock
      */
@@ -65,14 +65,14 @@ class Stock extends Model
         $bon_id,
         $produit_id,
         $magasin_id,
-        $bon_id,
-   
+
+
         $annee_id,
         $quantite,
         $type_mouvement
-       
-        
-       
+
+
+
 
     )
     {
@@ -82,13 +82,13 @@ class Stock extends Model
         $stock->bon_id = $bon_id;
         $stock->produit_id = $produit_id;
         $stock->magasin_id = $magasin_id;
-        $stock->bon_id = $bon_id;
-     
+
+
         $stock->annee_id = $annee_id;
 
         $stock->quantite = $quantite;
         $stock->type_mouvement = $type_mouvement;
-       
+
         $stock->created_at = Carbon::now();
 
         $stock->save();
@@ -115,12 +115,12 @@ class Stock extends Model
      * @param  string $produit_id
      * @param  string $magasin_id
      * @param  date $bon_id
-  
+
      * @param  int $annee_id
      * @param  int $quantite
      * @param  int $type_mouvement
-    
-    
+
+
 
      * @param int $id
      * @return  Stock
@@ -130,12 +130,12 @@ class Stock extends Model
          $bon_id,
         $produit_id,
         $magasin_id,
-        $bon_id,
+
         $annee_id,
         $quantite,
         $type_mouvement,
-       
-       
+
+
         $id)
     {
 
@@ -147,14 +147,14 @@ class Stock extends Model
             'bon_id' => $bon_id,
             'produit_id' => $produit_id,
             'magasin_id' => $magasin_id,
-            'bon_id' => $bon_id,
+
             'annee_id' => $annee_id,
 
             'quantite' => $quantite,
             'type_mouvement' => $type_mouvement,
 
 
-           
+
             'id' => $id,
 
 
@@ -195,8 +195,8 @@ class Stock extends Model
      * @param  int $bon_id
      * @param  int $magasin_id
      * @param  int $produit_id
-  
- 
+
+
 
 
      *
@@ -210,12 +210,12 @@ class Stock extends Model
         $bon_id = null,
         $magasin_id = null,
         $produit_id = null
-       
+
 
 
     ) {
 
-      
+
 
         $query =  Stock::where('etat', '!=', TypeStatus::SUPPRIME)
         ;
@@ -225,7 +225,7 @@ class Stock extends Model
             $query->where('annee_id', '=', $annee_id);
         }
 
-        
+
 
 
          if ($type_mouvement != null) {
@@ -252,7 +252,7 @@ class Stock extends Model
         }
 
 
-       
+
 
 
         return    $query->get();
@@ -261,7 +261,7 @@ class Stock extends Model
 
 
     /**
-     * Retourne le nombre  des  activités 
+     * Retourne le nombre  des  activités
 
 
         * @param  int $annee_id
@@ -269,9 +269,9 @@ class Stock extends Model
      * @param  int $bon_id
      * @param  int $magasin_id
      * @param  int $produit_id
-  
-  
-    
+
+
+
 
      * @return  int $total
      */
@@ -298,7 +298,7 @@ class Stock extends Model
             $query->where('annee_id', '=', $annee_id);
         }
 
-        
+
 
 
          if ($type_mouvement != null) {
@@ -325,7 +325,7 @@ class Stock extends Model
         }
 
 
-       
+
 
 
         $total = $query->count();
@@ -352,11 +352,11 @@ class Stock extends Model
     }
 
 
-   
+
 
 
      /**
-     * Obtenir un bon 
+     * Obtenir un bon
      *
      */
     public function bon()
@@ -371,7 +371,7 @@ class Stock extends Model
 
 
      /**
-     * Obtenir un bon 
+     * Obtenir un bon
      *
      */
     public function magasin()
@@ -386,7 +386,7 @@ class Stock extends Model
 
 
      /**
-     * Obtenir un produit  
+     * Obtenir un produit
      *
      */
     public function produit()
@@ -399,10 +399,10 @@ class Stock extends Model
 
 
 
-     
 
 
 
-  
+
+
 
 }

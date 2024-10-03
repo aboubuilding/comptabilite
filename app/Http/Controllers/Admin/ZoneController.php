@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Car;
+use App\Models\Depense;
+use App\Models\DepenseVoiture;
 use App\Models\Zone;
 
 
@@ -34,8 +36,8 @@ class ZoneController extends Controller
                 "libelle"=>$zone->libelle == null ? ' ' :$zone->libelle,
                 "voiture"=>$zone->voiture_id == null ? ' ' :$zone->voiture->plaque,
                 "chauffeur"=>$zone->chauffeur_id == null ? ' ' :$zone->chauffeur->nom.''.$zone->chauffeur->prenom,
-                "total_eleve"=> 0,
-                "total_depense"=> 0,
+                "total_eleve"=> Car::getTotal($annee_id,null,null,null,null,null,$zone->id),
+                "total_depense"=> DepenseVoiture::get,
                 "chiffre_affaire"=> 0,
 
 
