@@ -615,7 +615,86 @@ Ajouter un paiement
 
                         </div>
 
+
+
+
                         <div class="tab-pane fade" id="frais_examen">
+
+
+
+                            <br>
+                            <br>
+
+
+<div id="row_examen">
+
+    <div class="col-xl-4">
+        <div class="mb-3">
+            <label  class="form-label d-block">Frais examen    </label>
+
+            <input type="number"  class="form-control" id="montant_frais_examen" name="montant_frais_examen" ><br>
+
+
+
+        </div>
+
+        <span class="text-danger error-text montant_frais_examen_error"> </span>
+
+
+
+    </div>
+
+    <div class="col-xl-4">
+        <div class="mb-3">
+            <label  class="form-label d-block">Frais déjà payé    </label>
+
+            <input type="number"  class="form-control" id="deja_frais_examen" name="deja_frais_examen" ><br>
+
+
+
+        </div>
+
+        <span class="text-danger error-text deja_frais_examen_error"> </span>
+
+
+
+    </div>
+
+    <div class="col-xl-4">
+        <div class="mb-3">
+            <label  class="form-label d-block">Montant à payer     </label>
+
+            <input type="number"  class="form-control" id="frais_examen_payer" name="frais_examen_payer" ><br>
+
+
+
+        </div>
+
+        <span class="text-danger error-text frais_examen_payer_error"> </span>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+                            </div>
+
+
+
+
+
+
 
                         </div>
 
@@ -1029,6 +1108,12 @@ $("#montant_livre").on("change", function () {
 
 
 
+   //--------------------------------- Gestion de l onglet  des frais d examens
+
+
+
+
+
 });
 
 
@@ -1104,6 +1189,19 @@ $("#montant_livre").on("change", function () {
             $('#montant_ligne_produit').prop('disabled', true);
             $("#ajouterPaiement").attr("disabled", false);
 
+
+             //------------------------ Initialisation des données de l onglet de frais d examen
+
+
+        $('#montant_frais_examen').val(0);
+        $('#deja_frais_examen').val(0);
+        $('#frais_examen_payer').val(0);
+
+
+
+        $('#montant_frais_examen').prop('disabled', true);
+        $('#deja_frais_examen').prop('disabled', true);
+        $('#frais_examen_payer').prop('disabled', true);
 
 
 

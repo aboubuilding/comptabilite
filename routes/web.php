@@ -50,7 +50,7 @@ Route::middleware(['admin', 'comptable', 'directeur'])->group(function () {
     Route::get('/inscriptions/niveaux', [App\Http\Controllers\Admin\InscriptionController::class, 'niveaux'])->name('admin_chiffre_niveaux');
     Route::get('/inscriptions/classes', [App\Http\Controllers\Admin\InscriptionController::class, 'classes'])->name('admin_chiffre_classes');
     Route::get('/inscriptions/eleves', [App\Http\Controllers\Admin\InscriptionController::class, 'eleves'])->name('admin_chiffre_eleves');
-
+    Route::get('/inscriptions/charger/{id}', [App\Http\Controllers\Admin\InscriptionController::class, 'charger'])->name('admin_inscriptions_charger');
 
 
 //----------------- Paiements

@@ -47,7 +47,7 @@ DROP COLUMN voiture_id;
 ALTER TABLE lignes
 DROP COLUMN chauffeur_id;
 
------------ requete pour obtenir la liste des eleves n ayant pas encore payé 
+----------- requete pour obtenir la liste des eleves n ayant pas encore payé
 select e.nom, i.id,  e.nom , e.prenom , n.libelle as niveau_eleve, p.email
 
 from inscriptions i
@@ -62,3 +62,6 @@ and i.statut_validation = 2
 and i.id not in (select distinct d.inscription_id
 
 from details d  )
+
+----------- requete pour ajouter la  colonne  frais examen 
+ALTER TABLE `inscriptions` ADD `frais_examen` FLOAT NULL AFTER `frais_livre`;

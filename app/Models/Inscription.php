@@ -1191,13 +1191,13 @@ class Inscription extends Model
         $cycle_id  = null,
         $niveau_id  = null,
         $classe_id  = null
-   
+
 
 
 
     ) {
 
-       
+
 
         $query =  DB::table('inscriptions')
         ->where('inscriptions.etat', '!=', TypeStatus::SUPPRIME)
@@ -1230,7 +1230,7 @@ class Inscription extends Model
 
 
 
-        
+
 
 
         $total = $query->SUM('inscriptions.frais_scolarite');
@@ -1261,7 +1261,7 @@ class Inscription extends Model
         $cycle_id  = null,
         $niveau_id  = null,
         $classe_id  = null,
-     
+
 
 
 
@@ -1300,7 +1300,7 @@ class Inscription extends Model
 
 
 
-      
+
         $total = $query->SUM('inscriptions.frais_cantine');
 
         if ($total) {
@@ -1329,13 +1329,13 @@ class Inscription extends Model
         $cycle_id  = null,
         $niveau_id  = null,
         $classe_id  = null
-      
+
 
 
 
     ) {
 
-      
+
         $query =  DB::table('inscriptions')
         ->where('inscriptions.etat', '!=', TypeStatus::SUPPRIME)
         ->where('inscriptions.statut_validation', '=', StatutValidation::VALIDE)
@@ -1397,13 +1397,13 @@ class Inscription extends Model
         $cycle_id  = null,
         $niveau_id  = null,
         $classe_id  = null
-       
+
 
 
 
     ) {
 
-       
+
 
         $query =  DB::table('inscriptions')
         ->where('inscriptions.etat', '!=', TypeStatus::SUPPRIME)
@@ -1446,6 +1446,42 @@ class Inscription extends Model
         }
 
         return 0;
+
+
+
+    }
+
+
+
+     /**
+     * Retourne la liste des  eleves en classe d examen
+     *
+     *
+     * @param  int $annee_id
+
+     *  @return  array
+     */
+
+    public static function getListeExamen(
+
+        $annee_id = null
+
+
+
+    )
+
+    {
+
+
+        $query =  Inscription:: select('inscriptions.id as inscription_id', 'eleves.nom as nom_eleve', 'eleves.prenom as prenom_eleve',
+        'niveaux.libelle as niveau_libelle')
+
+        ->join('eleves','inscriptions.eleve_id','=','eleves.id')
+        ->join('niveaux','inscriptions.niveau_id','=','niveaux.id')
+
+
+
+        ;
 
 
 
