@@ -49,9 +49,9 @@
             </a>
             <ul aria-expanded="false">
 
-
-
                 <li><a href="{{url('/paiements/index')}}">Tous les paiements   </a></li>
+
+                <li><a href="{{url('/paiements/add')}}"> Ajouter un paiement   </a></li>
 
                 <li><a href="{{url('/paiements/details')}}">Tous les details   </a></li>
                 <li><a href="{{url('/paiements/nonencaisse')}}">Non encaisses   </a></li>

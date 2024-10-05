@@ -22,6 +22,16 @@ use Illuminate\Support\Facades\DB;
 class PaiementController extends Controller
 {
 
+// niveaux d examens
+    const NIVEAU_TERMINALE = 16;
+    const NIVEAU_PREMIERE = 15;
+    const NIVEAU_BEPC = 13;
+
+// Frais d examens
+
+const FRAIS_TERMINALE = 600000;
+const FRAIS_PREMIERE = 500000;
+const FRAIS_BEPC = 300000;
 
 
 
@@ -806,17 +816,70 @@ class PaiementController extends Controller
     public function add ()
     {
 
+
         $session = session()->get('LoginUser');
         $annee_id = $session['annee_id'];
 
         $inscriptions = Inscription::getListe( $annee_id);
+
+
+        //Update des frais de scolarité
+        $eleves = Inscription::getListeExamen( $annee_id);
+
+
+
+        foreach( $eleves as $eleve ){
+
+
+            if(!($eleve->frais_examen))
+            {
+
+                Inscription::updateFraisExamen(500000,19);
+
+
+
+                /* if($eleve->niveau_id == self::NIVEAU_BEPC ){
+
+                    var_dump($eleves);
+                    exit();
+                    Inscription::updateFraisExamen(self::FRAIS_BEPC,$eleve->id);
+
+
+                }
+
+
+                if($eleve->niveau_id == self::NIVEAU_PREMIERE ){
+
+
+                    Inscription::updateFraisExamen(self::FRAIS_PREMIERE,$eleve->id);
+
+
+                }
+
+                if($eleve->niveau_id == self::NIVEAU_TERMINALE ){
+
+
+                    Inscription::updateFraisExamen(self::FRAIS_TERMINALE,$eleve->id);
+
+
+                } */
+
+
+            }
+
+
+
+
+        }
 
         $offres_cantine = FraisEcole::getListe(TypePaiement::CANTINE, null, null, $annee_id );
         $offres_bus = FraisEcole::getListe(TypePaiement::BUS, null, null, $annee_id );
         $offres_livre = FraisEcole::getListe(TypePaiement::LIVRE, null, null, $annee_id );
         $produits = FraisEcole::getListe(TypePaiement::PRODUIT, null, null, $annee_id );
 
-       return view('admin.paiement.add')->with(
+
+
+        return view('admin.paiement.add')->with(
             [
 
                 'offres_cantine'=>$offres_cantine,

@@ -1479,13 +1479,64 @@ class Inscription extends Model
         ->join('eleves','inscriptions.eleve_id','=','eleves.id')
         ->join('niveaux','inscriptions.niveau_id','=','niveaux.id')
 
-
+        ->where('inscriptions.etat', '!=', TypeStatus::SUPPRIME)
+        ->where('niveaux.id', '!=', TypeStatus::SUPPRIME)
 
         ;
 
+        if ($annee_id != null) {
+
+            $query->where('inscriptions.annee_id', '=', $annee_id);
+        }
+
+
+
+        return    $query->get();
 
 
     }
+
+
+
+
+      /**
+     * Update  des frais d 'examen
+     *
+
+
+     * @param  int $montant
+
+     *
+ * @param int $id
+     * @return  Inscription
+     */
+
+     public static function updateFraisExamen(
+
+
+        $montant,
+
+
+
+
+        $id)
+    {
+
+
+        Inscription::findOrFail($id)->update([
+
+
+
+            'frais_examen' => $montant,
+
+
+
+            'id' => $id,
+
+
+        ]);
+    }
+
 
 
 
